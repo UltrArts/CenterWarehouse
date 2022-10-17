@@ -5,14 +5,17 @@
  */
 package centerwarehouse;
 
+import View.MainFrame;
+
 public class CenterWarehouse {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.print("jhgvcx");
-                
+//        System.out.print("jhgvcx");
+          MainFrame mf = new MainFrame();
+          mf.setVisible(true);
     }
     
 }
