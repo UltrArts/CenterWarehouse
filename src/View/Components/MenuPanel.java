@@ -58,7 +58,7 @@ public class MenuPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/logo_light.png"))); // NOI18N
-        jLabel1.setText("Center Warehouse");
+        jLabel1.setText("Warehouse");
 
         javax.swing.GroupLayout pnMovingLayout = new javax.swing.GroupLayout(pnMoving);
         pnMoving.setLayout(pnMovingLayout);
