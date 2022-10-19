@@ -24,7 +24,7 @@ public class TableStatus extends JLabel{
         setText(type.toString());
         repaint();
     }
-
+//Some change to commit
     @Override
     protected void paintComponent(Graphics grphcs) {
         if (type != null) {
