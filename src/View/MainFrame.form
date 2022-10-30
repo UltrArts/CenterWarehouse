@@ -79,6 +79,9 @@
         <Component class="View.Components.MenuPanel" name="menuPanel1">
         </Component>
         <Component class="View.Components.HeaderPanel" name="headerPanel2">
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="headerPanel2AncestorAdded"/>
+          </Events>
         </Component>
         <Container class="View.Components.FooterPanel" name="footerPanel2">
 
@@ -135,6 +138,9 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="View.Forms.HomeForm" name="homeForm2">
+              <Events>
+                <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="homeForm2AncestorAdded"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

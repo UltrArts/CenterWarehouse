@@ -38,6 +38,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         panelBorder1.setBackground(new java.awt.Color(220, 220, 220));
 
+        headerPanel2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                headerPanel2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Edson Da Cruz & João Baciquete");
 
@@ -65,6 +75,16 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jScrollPane1.setBorder(null);
+
+        homeForm2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                homeForm2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(homeForm2);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -108,6 +128,14 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void homeForm2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_homeForm2AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_homeForm2AncestorAdded
+
+    private void headerPanel2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_headerPanel2AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_headerPanel2AncestorAdded
 
     /**
      * @param args the command line arguments
