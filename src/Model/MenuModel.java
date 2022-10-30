@@ -8,10 +8,6 @@ package Model;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Edson-UltraDev
- */
 public class MenuModel {
 
     public MenuModel(String icon, String name, MenuType type) {

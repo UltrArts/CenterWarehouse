@@ -1,6 +1,7 @@
 
 package View.Components;
 
+import Event.EventMenuSelected;
 import Model.MenuModel;
 import com.sun.prism.paint.Gradient;
 import java.awt.Color;
@@ -15,7 +16,11 @@ import javax.swing.JFrame;
 
 public class MenuPanel extends javax.swing.JPanel {
 
-   
+   private EventMenuSelected event;
+    public void addEventMenuSelected(EventMenuSelected event) {
+        this.event = event;
+        menuList1.addEventMenuSelected(event);
+    }
     public MenuPanel() {
         initComponents();
         setOpaque(false);
