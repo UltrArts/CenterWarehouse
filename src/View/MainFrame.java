@@ -26,7 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
 //                    setForm(form2);
                 } else if (index == 8) {
 //                    setForm(form3);
-JOptionPane.showMessageDialog(null, " Adeus, volte sempre!");
+JOptionPane.showMessageDialog(null, " Adeus, volte sempre!    ");
                     System.exit(0);
                 }
             }
