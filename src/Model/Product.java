@@ -8,6 +8,7 @@ public class Product {
     private double damaged;
     private String created_at;
     private String updated_at;
+    
 
     public int getId() {
         return id;
