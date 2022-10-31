@@ -32,20 +32,20 @@ public class MenuPanel extends javax.swing.JPanel {
     private void init(){
         menuList1.addItem(new MenuModel("1", "DASHBOARD", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("2", "PRODUTOS", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("3", "Dashboard", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("4", "Dashboard", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("5", "Dashboard", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("3", "LOJAS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("4", "FORNECEDOR", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("5", "ENTRADAS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("6", "SAÍDAS", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
         
-        menuList1.addItem(new MenuModel("", "ADMIN", MenuModel.MenuType.TITLE));
+        menuList1.addItem(new MenuModel("", "ADMINISTRAÇÃO", MenuModel.MenuType.TITLE));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
-        menuList1.addItem(new MenuModel("6", "Dashboard", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("7", "Dashboard", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("8", "Dashboard", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("7", "USUÁRIOS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("8", "HISTÓRICO", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
         menuList1.addItem(new MenuModel("", "CONFIGURAÇÕES", MenuModel.MenuType.TITLE));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
-        menuList1.addItem(new MenuModel("9", "Dashboard", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("9", "PERFIL", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("10", "SAIR", MenuModel.MenuType.MENU));
     }
 

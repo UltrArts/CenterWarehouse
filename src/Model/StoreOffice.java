@@ -1,33 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Lenovo T460
- */
-public class User extends Person{
+public class StoreOffice extends Person{
+    private int id_store;
+
+    public int getId_store() {
+        return id_store;
+    }
+
+    public void setId_store(int id_store) {
+        this.id_store = id_store;
+    }
     
-    private String username;
-    private String password;
-
-    public String getUsername() {
-        return username;
+    @Override
+    public void setId(int id) {
+        super.setId(id); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public int getId() {
+        return super.getId(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -99,6 +90,7 @@ public class User extends Person{
     public String getBi() {
         return super.getBi(); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
     
 }

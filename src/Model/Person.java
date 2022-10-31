@@ -10,7 +10,8 @@ package Model;
  * @author Lenovo T460
  */
 public class Person {
-    private int bi;
+    private int id;
+    private String bi;
     private String name;
     private String lastname;
     private String adress;
@@ -18,11 +19,11 @@ public class Person {
     private String created_at;
     private String updated_at;
 
-    public int getBi() {
+    public String getBi() {
         return bi;
     }
 
-    public void setBi(int bi) {
+    public void setBi(String bi) {
         this.bi = bi;
     }
 
@@ -72,6 +73,14 @@ public class Person {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

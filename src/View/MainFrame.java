@@ -2,7 +2,16 @@
 package View;
 
 import Event.EventMenuSelected;
+import Model.DBConnection;
+import View.Forms.CheckInForm;
+import View.Forms.CheckOutForm;
+import View.Forms.HistoricForm;
 import View.Forms.HomeForm;
+import View.Forms.ProductForm;
+import View.Forms.ProfileForm;
+import View.Forms.StoreForm;
+import View.Forms.SuppliersForm;
+import View.Forms.UserForm;
 import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -10,24 +19,83 @@ import javax.swing.JOptionPane;
 
 public class MainFrame extends javax.swing.JFrame {
     private HomeForm dashboard;
+    private ProductForm prodForm;
+    private StoreForm storeForm;
+    private SuppliersForm supForm;
+    private CheckInForm inForm;
+    private CheckOutForm outForm;
+    private UserForm userForm;
+    private HistoricForm histForm;
+    private ProfileForm profileForm;
     public MainFrame() {
         initComponents();        
         setBackground(new Color(0, 0, 0,0 ));
         dashboard = new HomeForm();
+        prodForm = new ProductForm();
+        storeForm = new StoreForm();
+        supForm = new SuppliersForm();
+        inForm = new CheckInForm();
+        outForm = new CheckOutForm();
+        userForm = new UserForm();
+        histForm = new HistoricForm();
+        profileForm = new ProfileForm();
          menuPanel.initMoving(MainFrame.this);
          menuPanel.addEventMenuSelected(new EventMenuSelected() {
             @Override
+//             menuList1.addItem(new MenuModel("1", "DASHBOARD", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("2", "PRODUTOS", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("3", "LOJAS", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("4", "FORNECEDOR", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("5", "ENTRADAS", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("6", "SAÍDAS", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
+//        
+//        menuList1.addItem(new MenuModel("", "ADMINISTRAÇÃO", MenuModel.MenuType.TITLE));
+//        menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
+//        menuList1.addItem(new MenuModel("7", "USUÁRIOS", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("8", "HISTÓRICO", MenuModel.MenuType.MENU));
+//        menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
+//        menuList1.addItem(new MenuModel("", "CONFIGURAÇÕES", MenuModel.MenuType.TITLE));
+//        menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
+//        menuList1.addItem(new MenuModel("9", "PERFIL", MenuModel.MenuType.MENU));
             public void selected(int index) {
-                if (index == 0) {
-                    setForm(dashboard);
-                } else if (index == 1) {
-//                    setForm(form1);
-                } else if (index == 2) {
-//                    setForm(form2);
-                } else if (index == 8) {
-//                    setForm(form3);
-JOptionPane.showMessageDialog(null, " Adeus, volte sempre!    ");
-                    System.exit(0);
+                DBConnection db = new DBConnection();
+                switch (index) {
+                    case 0:
+                        setForm(dashboard);
+                        break;
+                    case 1:
+                        setForm(prodForm);
+                        break;
+                    case 2:
+                        setForm(storeForm);
+                        break;
+                    case 3:
+                        setForm(supForm);
+                        break;
+                    case 4:
+                        setForm(inForm);
+                        break;
+                    case 5:
+                        setForm(outForm);
+                        break;
+                    case 9:
+                        setForm(userForm);
+                        break;
+                    case 10:
+                        setForm(histForm);
+                        break;
+                    case 14:
+                        setForm(profileForm);
+                        break;
+                    case 15:
+                        if(JOptionPane.showConfirmDialog(null, "Tem certeza quepretende Sair?") == 0){
+                            JOptionPane.showMessageDialog(null,"Adeus, Volte Sempre!");
+                            System.exit(0);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         });
