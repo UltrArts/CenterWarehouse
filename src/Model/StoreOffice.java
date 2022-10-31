@@ -1,14 +1,14 @@
 package Model;
 
 public class StoreOffice extends Person{
-    private int id_store;
+    private int store_id;
 
-    public int getId_store() {
-        return id_store;
+    public int getStore_id() {
+        return store_id;
     }
 
-    public void setId_store(int id_store) {
-        this.id_store = id_store;
+    public void setStore_id(int store_id) {
+        this.store_id = store_id;
     }
     
     @Override

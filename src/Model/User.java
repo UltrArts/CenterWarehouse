@@ -1,18 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Lenovo T460
- */
 public class User extends Person{
     
     private String username;
     private String password;
+    
+    public User(){
+        
+    }
+
+    public User(String username, String password, int id, String name, String lastname) {
+        super(id, name, lastname);
+        this.username = username;
+        this.password = password;
+    }
+    
+
+    public User(String username, String password,  String bi, String name, String lastname, String adress, String contact) {
+        super(bi, name, lastname, adress, contact);
+        this.username = username;
+        this.password = password;
+    }
+    
+    
 
     public String getUsername() {
         return username;
