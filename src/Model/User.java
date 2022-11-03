@@ -21,6 +21,16 @@ public class User extends Person{
         this.username = username;
         this.password = password;
     }
+
+    public User(String username, String password, int id, String bi, String name,
+            String lastname, String adress, String contact, String created_at,
+            String updated_at) {
+        super(id, bi, name, lastname, adress, contact, created_at, updated_at);
+        this.username = username;
+        this.password = password;
+    }
+
+  
     
     
 

@@ -1,6 +1,7 @@
 
 package View.Components;
 
+import Controller.UserController;
 import Event.EventMenuSelected;
 import Model.MenuModel;
 import com.sun.prism.paint.Gradient;
@@ -13,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class MenuPanel extends javax.swing.JPanel {
 
@@ -31,23 +33,24 @@ public class MenuPanel extends javax.swing.JPanel {
     
     private void init(){
         menuList1.addItem(new MenuModel("1", "DASHBOARD", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("2", "PRODUTOS", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("3", "LOJAS", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("4", "FORNECEDOR", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("5", "ENTRADAS", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("6", "SAÍDAS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("product", "PRODUTOS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("shop", "LOJAS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("supplier", "FORNECEDORES", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("input", "ENTRADAS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("output", "SAÍDAS", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
         
         menuList1.addItem(new MenuModel("", "ADMINISTRAÇÃO", MenuModel.MenuType.TITLE));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
-        menuList1.addItem(new MenuModel("7", "USUÁRIOS", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("8", "HISTÓRICO", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("users", "USUÁRIOS", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("historical", "HISTÓRICO", MenuModel.MenuType.MENU));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
         menuList1.addItem(new MenuModel("", "CONFIGURAÇÕES", MenuModel.MenuType.TITLE));
         menuList1.addItem(new MenuModel("", "", MenuModel.MenuType.EMPTY));
         menuList1.addItem(new MenuModel("9", "PERFIL", MenuModel.MenuType.MENU));
-        menuList1.addItem(new MenuModel("10", "SAIR", MenuModel.MenuType.MENU));
+        menuList1.addItem(new MenuModel("exit", "SAIR", MenuModel.MenuType.MENU));
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

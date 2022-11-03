@@ -9,14 +9,13 @@ public class CenterWarehouse {
         // TODO code application logic here
 //        System.out.print("jhgvcx");
           
-          UserController userCtrl = new UserController();
-          while(userCtrl.getUsers() == null){
+         UserController userCtrl = new UserController();
+          if(userCtrl.getUsers().size() == 0){
               JOptionPane.showMessageDialog(null, "O Sistema precisa efectuar configurações de predefinição! \nPressione Ok para continuar!");
               userCtrl.seed();
-          }
-
-//          MainFrame mf = new MainFrame();
-//          mf.setVisible(true);
+          };
+          MainFrame mf = new MainFrame();
+          mf.setVisible(true);
 //                
           
     }

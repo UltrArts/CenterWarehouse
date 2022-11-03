@@ -30,7 +30,22 @@ public class Person {
         this.adress = adress;
         this.contact = contact;
     }
+
+    public Person(int id, String bi, String name, String lastname, String adress,
+            String contact, String created_at, String updated_at) {
+        this.id = id;
+        this.bi = bi;
+        this.name = name;
+        this.lastname = lastname;
+        this.adress = adress;
+        this.contact = contact;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
     
+    
+
+   
     
   
     public String getBi() {

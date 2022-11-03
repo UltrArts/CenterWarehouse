@@ -8,17 +8,10 @@ import javax.swing.ImageIcon;
 public class HomeForm extends javax.swing.JPanel {
 
     public HomeForm() {
-        initComponents();
-         card1.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/stock.png")), "Stock Total", "200,000", "Aumento 10%"));
-        card2.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/profit.png")), "Usuários", "5,000", "Aumento 39%"));
-        card3.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/flag.png")), "Saídas", "100", "Aumento 20%"));
-        //  add row tabletable
-//        spTable.setVerticalScrollBar(new ScrollBar());
-//        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
-//        spTable.getViewport().setBackground(Color.WHITE);
-//        JPanel p = new JPanel();
-//        p.setBackground(Color.WHITE);
-//        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        initComponents(); 
+        card1.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/product.png")), "Stock Total", "200,000", "600Mt de Custo"));
+        card2.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/input.png")), "Entradas", "5,000", "60000Mt de Custo"));
+        card3.setData(new CardModel(new ImageIcon(getClass().getResource("/Imgs/output.png")), "Saídas", "100", "70500Mt acomulado"));
         int val = 1000;
         tbTable.addRow(new Object[]{val, "Banana", 30, "3000",TableStatusType.ACTIVO});
         tbTable.addRow(new Object[]{val+1, "Sapatos Casuais Zara", 270, "340",TableStatusType.ACTIVO});
