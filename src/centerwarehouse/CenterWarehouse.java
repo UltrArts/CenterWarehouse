@@ -1,3 +1,4 @@
+package centerwarehouse;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,17 +6,27 @@
  */
 //package centerwarehouse;
 
-//import View.MainFrame;
+import Controller.UserController;
+import View.Forms.LoginForme;
+import View.MainFrame;
+import javax.swing.JOptionPane;
 
-//public class CenterWarehouse {
-    /**
-     * @param args the command line arguments
-     */
-   // public static void main(String[] args) {
+public class CenterWarehouse {
+    public static void main(String[] args) {
         // TODO code application logic here
 //        System.out.print("jhgvcx");
-         // MainFrame mf = new MainFrame();
-          //mf.setVisible(true);
-   // }
     
 //}
+          
+         UserController userCtrl = new UserController();
+          if(userCtrl.getUsers().size() == 0){
+              JOptionPane.showMessageDialog(null, "O Sistema precisa efectuar configurações de predefinição! \nPressione Ok para continuar!");
+              userCtrl.seed();
+          };
+          MainFrame mf = new MainFrame();
+          mf.setVisible(true);
+//          LoginForme lf = new LoginForme();
+//          lf.setVisible(true);
+//          
+    }
+}

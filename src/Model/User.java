@@ -1,18 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Lenovo T460
- */
 public class User extends Person{
     
     private String username;
     private String password;
+    private String profile;
+    private boolean status;
+    
+    public User(){
+        
+    }
+
+    public User(String username, String password, int id, String name, String lastname) {
+        super(id, name, lastname);
+        this.username = username;
+        this.password = password;
+    }
+    
+
+    public User(String username, String password,  String bi, String name, String lastname, String adress, String contact, String profile) {
+        super(bi, name, lastname, adress, contact);
+        this.username = username;
+        this.password = password;
+        this.profile = profile;
+    }
+
+    public User(String username, String password,  String bi, String name, String lastname, String adress, String contact) {
+        super(bi, name, lastname, adress, contact);
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, int id, String bi, String name,
+            String lastname, String adress, String contact, String profile, Boolean status, String created_at,
+            String updated_at) {
+        super(id, bi, name, lastname, adress, contact, created_at, updated_at);
+        this.username = username;
+        this.password = password;
+        this.profile = profile;
+        this.status = status;
+    }
+    
+    public User( int id, String bi, String name,
+            String lastname, String adress, String contact, String profile) {
+        super(id, bi, name, lastname, adress, contact);
+        this.profile = profile;
+    }
+    
+    
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public String getUsername() {
         return username;
@@ -98,6 +141,14 @@ public class User extends Person{
     @Override
     public String getBi() {
         return super.getBi(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
     
     

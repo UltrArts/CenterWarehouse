@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Lenovo T460
- */
 public class Person {
     private int id;
     private String bi;
@@ -19,6 +10,54 @@ public class Person {
     private String created_at;
     private String updated_at;
 
+    
+    public Person(){
+        
+    }
+
+    public Person(int id, String name, String lastname) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+    }
+    
+    
+
+    public Person(String bi, String name, String lastname, String adress, String contact) {
+        this.bi = bi;
+        this.name = name;
+        this.lastname = lastname;
+        this.adress = adress;
+        this.contact = contact;
+    }
+
+    public Person(int id, String bi, String name, String lastname, String adress,
+            String contact, String created_at, String updated_at) {
+        this.id = id;
+        this.bi = bi;
+        this.name = name;
+        this.lastname = lastname;
+        this.adress = adress;
+        this.contact = contact;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public Person(int id, String bi, String name, String lastname, String adress,
+            String contact) {
+        this.id = id;
+        this.bi = bi;
+        this.name = name;
+        this.lastname = lastname;
+        this.adress = adress;
+        this.contact = contact;
+    }
+    
+    
+
+   
+    
+  
     public String getBi() {
         return bi;
     }

@@ -5,17 +5,26 @@
  */
 package View.Forms;
 
+import Controller.UserController;
+import Model.User;
+import View.MainFrame;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo T460
  */
 public class LoginForme extends javax.swing.JFrame {
-
+    UserController userCtrl = new UserController();
+    User user = new User();
     /**
      * Creates new form LoginForme
      */
     public LoginForme() {
         initComponents();
+//        java.awt.event.KeyEvent(lbLogin);
+//        lbLogin.add(java.awt.event.KeyEvent);
     }
 
     /**
@@ -34,13 +43,13 @@ public class LoginForme extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txtUsername = new javax.swing.JTextField();
-        pss = new javax.swing.JPasswordField();
+        ptfPassword = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lbLogin = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -112,16 +121,21 @@ public class LoginForme extends javax.swing.JFrame {
         });
         jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 277, 42));
 
-        pss.setBackground(new java.awt.Color(186, 79, 84));
-        pss.setForeground(new java.awt.Color(204, 204, 204));
-        pss.setText("Password");
-        pss.setBorder(null);
-        pss.addFocusListener(new java.awt.event.FocusAdapter() {
+        ptfPassword.setBackground(new java.awt.Color(186, 79, 84));
+        ptfPassword.setForeground(new java.awt.Color(204, 204, 204));
+        ptfPassword.setText("Password");
+        ptfPassword.setBorder(null);
+        ptfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                pssFocusGained(evt);
+                ptfPasswordFocusGained(evt);
             }
         });
-        jPanel3.add(pss, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 277, 40));
+        ptfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ptfPasswordActionPerformed(evt);
+            }
+        });
+        jPanel3.add(ptfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 277, 40));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 202, 250, 30));
         jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 250, 30));
 
@@ -133,19 +147,29 @@ public class LoginForme extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(186, 79, 84));
 
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("    Log In");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbLogin.setForeground(new java.awt.Color(204, 204, 204));
+        lbLogin.setText("    Log In");
+        lbLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLoginMouseClicked(evt);
+            }
+        });
+        lbLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbLoginKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addComponent(lbLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(lbLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 40));
@@ -189,7 +213,7 @@ public class LoginForme extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,50 +250,83 @@ public class LoginForme extends javax.swing.JFrame {
         txtUsername.setText("");
     }//GEN-LAST:event_txtUsernameFocusGained
 
-    private void pssFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pssFocusGained
+    private void ptfPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ptfPasswordFocusGained
          // Esse evento é responsavel por "fazer desaparecer" a informação de Username no campo TextField
-         pss.setText("");
-    }//GEN-LAST:event_pssFocusGained
+         ptfPassword.setText("");
+    }//GEN-LAST:event_ptfPasswordFocusGained
 
+    private void lbLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLoginMouseClicked
+        // TODO add your handling code here:
+        this.login();
+        
+    }//GEN-LAST:event_lbLoginMouseClicked
+
+    private void lbLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbLoginKeyPressed
+//         TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            JOptionPane.showMessageDialog(null, "Here Iam");
+            this.login();
+        }
+    }//GEN-LAST:event_lbLoginKeyPressed
+
+    private void ptfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ptfPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ptfPasswordActionPerformed
+
+    private void keyPressed(java.awt.event.KeyEvent evt){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.login();
+        }
+    }
+    
+    private void login(){
+        String password = String.valueOf(ptfPassword.getPassword());
+        String username = txtUsername.getText().toString();
+        if(userCtrl.login(username, password) != null){
+            this.dispose();
+            MainFrame mf = new MainFrame();
+            mf.setVisible(true);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginForme().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LoginForme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginForme().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -283,7 +340,8 @@ public class LoginForme extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JPasswordField pss;
+    private javax.swing.JLabel lbLogin;
+    private javax.swing.JPasswordField ptfPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

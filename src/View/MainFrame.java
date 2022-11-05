@@ -7,12 +7,15 @@ import View.Forms.CheckInForm;
 import View.Forms.CheckOutForm;
 import View.Forms.HistoricForm;
 import View.Forms.HomeForm;
+import View.Forms.LoginForme;
 import View.Forms.ProductForm;
 import View.Forms.ProfileForm;
 import View.Forms.StoreForm;
 import View.Forms.SuppliersForm;
 import View.Forms.UserForm;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -89,10 +92,7 @@ public class MainFrame extends javax.swing.JFrame {
                         setForm(profileForm);
                         break;
                     case 15:
-                        if(JOptionPane.showConfirmDialog(null, "Tem certeza quepretende Sair?") == 0){
-                            JOptionPane.showMessageDialog(null,"Adeus, Volte Sempre!");
-                            System.exit(0);
-                        }
+                        exit();
                         break;
                     default:
                         break;
@@ -101,6 +101,15 @@ public class MainFrame extends javax.swing.JFrame {
         });
         //  set when system open start with home form
         setForm(new HomeForm());
+    }
+    
+    private void exit(){
+         if(JOptionPane.showConfirmDialog(null, "Tem certeza quepretende Sair?") == 0){
+            JOptionPane.showMessageDialog(null,"Adeus, Volte Sempre!");
+            dispose();
+            LoginForme lf = new LoginForme();
+            lf.setVisible(true);
+        }
     }
     
     
