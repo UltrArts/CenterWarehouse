@@ -6,7 +6,9 @@ import Model.User;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -15,6 +17,9 @@ public class UserForm extends javax.swing.JPanel {
     UserController userCtrl;
     UserTable userTbl;
     DefaultTableModel tblmodel;
+    Border orangeBorder = BorderFactory.createLineBorder(Color.ORANGE, 2);
+    Border blueBorder = BorderFactory.createLineBorder(Color.BLUE, 2);
+    
     public UserForm() {
         initComponents();
         init();
@@ -312,8 +317,8 @@ public class UserForm extends javax.swing.JPanel {
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnActivateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,9 +341,11 @@ public class UserForm extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(txtId.getText().isEmpty())
-            create();
+            if(validation())
+                create();
         else
-            update();
+            if(validation())
+                update();
 //        JOptionPane.showMessageDialog(null, txtProfile.getSelectedItem().toString());
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -356,7 +363,7 @@ public class UserForm extends javax.swing.JPanel {
         // TODO add your handling code here:
 //        updateStatus();
         try{
-        tblUsers.setRowSorter(null);
+            tblUsers.setRowSorter(null);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
@@ -427,20 +434,20 @@ public class UserForm extends javax.swing.JPanel {
     }
     
     private void create(){
-        user = new User(txtUsername.getText(), "warehouse", txtBi.getText(),
-                txtName.getText(), txtLastName.getText(), txtAddress.getText(),
-                txtContact.getText(), cbProfile.getSelectedItem().toString());
+        setUpUser();
+        user.setPassword("warehouse");
+        user.setUsername(txtUsername.getText());
+//        JOp
         userCtrl = new UserController();
-        if(userCtrl.saveUser(user)){
-            this.clear_form();
-            userTbl.list();
-        }
+            if(userCtrl.saveUser(user)){
+                this.clear_form();
+                userTbl.list();
+            }
     }
     
     private void update(){
-        user = new User(Integer.parseInt(txtId.getText()), txtBi.getText(), txtName.getText(),
-                txtLastName.getText(), txtAddress.getText(), txtContact.getText(),
-                cbProfile.getSelectedItem().toString());
+        setUpUser();
+        user.setUsername("~~~~");
         if(userCtrl.updateUser(user)){
             populateTable();
             clear_form();
@@ -455,12 +462,75 @@ public class UserForm extends javax.swing.JPanel {
         cbProfile.setSelectedIndex(0);
         txtUsername.setText(null);
         txtName.setText(null);
-        txtId.setText(null);
+        txtId.setText("");
         txtUsername.setEditable(true);
         btnSave.setText("GRAVAR");
         btnActivateStatus.setEnabled(false);
         btnActivateStatus.setText("(Des)Activar");
     }
+    
+    private boolean validation(){
+        setUpUser();
+        boolean[] result = user.validation(user);
+        boolean rs = true;
+        if(result[0])
+            txtName.setBorder(blueBorder);
+        else{
+            txtName.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        if(result[1])
+            txtLastName.setBorder(blueBorder);
+        else{
+            txtLastName.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        if(result[2])
+            txtBi.setBorder(blueBorder);
+        else{
+            txtBi.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        if(result[3])
+            txtContact.setBorder(blueBorder);
+        else{
+            txtContact.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        if(result[4])
+            txtAddress.setBorder(blueBorder);
+        else{
+            txtAddress.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        if(result[5])
+            txtUsername.setBorder(blueBorder);
+        else{
+            txtUsername.setBorder(orangeBorder);
+            rs = false;
+        }
+        
+        return rs;
+    }
+    
+    private void setUpUser(){
+        int id;
+        if(txtId.getText().equals(""))
+            id = 0;
+        else
+            id = Integer.parseInt(txtId.getText());
+        user = new User(id, txtBi.getText(), txtName.getText(),
+                txtLastName.getText(), txtAddress.getText(), txtContact.getText(),
+                cbProfile.getSelectedItem().toString());
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivateStatus;
