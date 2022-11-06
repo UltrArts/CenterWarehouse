@@ -40,11 +40,9 @@ public class LoginForme extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        lbLogin = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        lbLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LoginForme");
@@ -97,6 +95,7 @@ public class LoginForme extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUsername.setBackground(new java.awt.Color(70, 130, 180));
+        txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(255, 255, 255));
         txtUsername.setText("Username");
         txtUsername.setBorder(null);
@@ -112,8 +111,9 @@ public class LoginForme extends javax.swing.JFrame {
         });
         jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 277, 42));
 
-        ptfPassword.setBackground(new java.awt.Color(186, 79, 84));
-        ptfPassword.setForeground(new java.awt.Color(204, 204, 204));
+        ptfPassword.setBackground(new java.awt.Color(70, 130, 180));
+        ptfPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ptfPassword.setForeground(new java.awt.Color(255, 255, 255));
         ptfPassword.setText("Password");
         ptfPassword.setBorder(null);
         ptfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -137,54 +137,7 @@ public class LoginForme extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, 40));
 
         jPanel4.setBackground(new java.awt.Color(70, 130, 180));
-
-        lbLogin.setForeground(new java.awt.Color(204, 204, 204));
-        lbLogin.setText("    Log In");
-        lbLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        lbLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbLoginMouseClicked(evt);
-            }
-        });
-        lbLogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lbLoginKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 40));
-
-        jPanel5.setBackground(new java.awt.Color(70, 130, 180));
-
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("  Sign Up");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 80, 40));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("  Preencha os dados de Usuário!!");
@@ -198,6 +151,22 @@ public class LoginForme extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 40, 30));
+
+        lbLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lbLogin.setText("    Log In");
+        lbLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLoginMouseClicked(evt);
+            }
+        });
+        lbLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbLoginKeyPressed(evt);
+            }
+        });
+        jPanel3.add(lbLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 110, 40));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -266,10 +235,16 @@ public class LoginForme extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ptfPasswordActionPerformed
 
-    private void keyPressed(java.awt.event.KeyEvent evt){
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.login();
-        }
+//    private void keyPressed(java.awt.event.KeyEvent evt){
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+//            this.login();
+//        }
+//    }
+    
+    public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER)
+        JOptionPane.showMessageDialog(null, "Eis-me aqui");
+        login();
     }
     
     private void login(){
@@ -282,6 +257,9 @@ public class LoginForme extends javax.swing.JFrame {
         }
         
     }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -320,7 +298,6 @@ public class LoginForme extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -330,7 +307,6 @@ public class LoginForme extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbLogin;

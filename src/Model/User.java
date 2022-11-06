@@ -1,6 +1,10 @@
 package Model;
 
-public class User extends Person{
+import Model.Rules.Validation;
+import Model.Rules.ValidationActionType;
+import javax.swing.JPanel;
+
+public class User extends Person implements Validation{
     
     private String username;
     private String password;
@@ -150,6 +154,64 @@ public class User extends Person{
     public void setProfile(String profile) {
         this.profile = profile;
     }
+    
+    public boolean[] validation(User us){
+        boolean[] error = new boolean[6];
+        if(minMaxSize(us.getName(), 2, 60))
+            error[0] = true;
+
+        if(minMaxSize(us.getLastname(), 2, 30))
+            error[1] = true;
+
+        if(minMaxSize(us.getBi(), 13, 13))
+            error[2] = true;
+        
+        if(minMaxSize(us.getContact(), 5, 13))
+            error[3] = true;
+
+        if(minSize(us.getAdress(), 5))
+            error[4] = true;
+        
+        if(minMaxSize(us.getUsername(), 4, 15))
+            error[5] = true;
+
+        
+        return error;
+    }
+
+    @Override
+    public boolean minSize(String text, int size) {
+        if(isNull(text))
+            return text.length() >= size;
+        return false;
+    }
+
+    @Override
+    public boolean maxSize(String text, int size) {
+        if(isNull(text))
+            return text.length() <= size;
+        return false;
+    }
+
+    @Override
+    public boolean isEqual(String text1, String text2) {
+        if(isNull(text1) && isNull(text2))
+            return text1.equals(text2);
+        return false;
+    }
+
+    @Override
+    public boolean minMaxSize(String text, int minSize, int maxSize) {
+        if(isNull(text))
+            return minSize(text, minSize) && maxSize(text, maxSize);
+        return false;
+    }
+
+    @Override
+    public boolean isNull(String text) {
+        return text != null;
+    }
+
     
     
 }

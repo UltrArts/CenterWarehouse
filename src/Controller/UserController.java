@@ -65,13 +65,13 @@ public class UserController {
         if(db.connect()){
             PreparedStatement stm;
             String sql;
-//            if(us.getUsername().equals(null))
+            if(us.getUsername().equals("~~~~"))
                 sql = "UPDATE user SET name=?, last_name=?, bi=?, address=?, contact=?, profile=? WHERE id=?";
-//            else
-//                sql = "UPDATE user SET username=?, password=? WHERE id=?";
+            else
+                sql = "UPDATE user SET  password=? WHERE id=?";
             try {
                 stm = db.conn.prepareStatement(sql);
-//                if(us.getUsername().equals("")){
+                if(us.getUsername().equals("~~~~")){
                     stm.setString(1, us.getName());
                     stm.setString(2, us.getLastname());
                     stm.setString(3, us.getBi());
@@ -79,11 +79,10 @@ public class UserController {
                     stm.setString(5, us.getContact());
                     stm.setString(6, us.getProfile());
                     stm.setInt(7, us.getId());
-//                }else{
-//                    stm.setString(1, us.getUsername());
-//                    stm.setString(2, us.getPassword());
-//                    stm.setInt(3, us.getId());
-//                }
+                }else{
+                    stm.setString(1, us.getPassword());
+                    stm.setInt(2, us.getId());
+                }
                 stm.execute();
                 JOptionPane.showMessageDialog(null, "Dados Actualizados Com Sucesso!");
                 return true;
