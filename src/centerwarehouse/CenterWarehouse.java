@@ -1,10 +1,4 @@
 package centerwarehouse;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//package centerwarehouse;
 
 import Controller.UserController;
 import View.Forms.LoginForme;
@@ -23,10 +17,10 @@ public class CenterWarehouse {
               JOptionPane.showMessageDialog(null, "O Sistema precisa efectuar configurações de predefinição! \nPressione Ok para continuar!");
               userCtrl.seed();
           };
-          MainFrame mf = new MainFrame();
-          mf.setVisible(true);
-//          LoginForme lf = new LoginForme();
-//          lf.setVisible(true);
+//          MainFrame mf = new MainFrame();
+//          mf.setVisible(true);
+          LoginForme lf = new LoginForme();
+          lf.setVisible(true);
 //          
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View.Forms;
 
 import Controller.UserController;
@@ -11,10 +6,6 @@ import View.MainFrame;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Lenovo T460
- */
 public class LoginForme extends javax.swing.JFrame {
     UserController userCtrl = new UserController();
     User user = new User();
@@ -60,16 +51,16 @@ public class LoginForme extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 102, 255));
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(74, 31, 61));
+        jPanel2.setBackground(new java.awt.Color(135, 206, 235));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/3.2_box_social_icon (1).png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/2559831_box_media_network_social_icon (1).png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(186, 79, 84));
+        jLabel8.setForeground(new java.awt.Color(70, 130, 180));
         jLabel8.setText("R I T ");
 
         jLabel9.setFont(new java.awt.Font("Vivaldi", 3, 36)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(186, 79, 84));
+        jLabel9.setForeground(new java.awt.Color(70, 130, 180));
         jLabel9.setText("Comercial...");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -102,11 +93,11 @@ public class LoginForme extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel3.setBackground(new java.awt.Color(70, 130, 180));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUsername.setBackground(new java.awt.Color(186, 79, 84));
-        txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsername.setBackground(new java.awt.Color(70, 130, 180));
+        txtUsername.setForeground(new java.awt.Color(255, 255, 255));
         txtUsername.setText("Username");
         txtUsername.setBorder(null);
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,7 +136,7 @@ public class LoginForme extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/2_lock_icon.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, 40));
 
-        jPanel4.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel4.setBackground(new java.awt.Color(70, 130, 180));
 
         lbLogin.setForeground(new java.awt.Color(204, 204, 204));
         lbLogin.setText("    Log In");
@@ -174,9 +165,9 @@ public class LoginForme extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 40));
 
-        jPanel5.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel5.setBackground(new java.awt.Color(70, 130, 180));
 
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("  Sign Up");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -188,12 +179,14 @@ public class LoginForme extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 80, 40));
 
-        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("  Preencha os dados de Usuário!!");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 240, 40));
 
