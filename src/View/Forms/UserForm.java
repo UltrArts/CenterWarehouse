@@ -5,9 +5,7 @@ import Model.Tables.UserTable;
 import Model.User;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -19,6 +17,7 @@ public class UserForm extends javax.swing.JPanel {
     DefaultTableModel tblmodel;
     Border orangeBorder = BorderFactory.createLineBorder(Color.ORANGE, 2);
     Border blueBorder = BorderFactory.createLineBorder(Color.BLUE, 2);
+    Border noBorder = BorderFactory.createLineBorder(Color.GRAY, 0);
     
     public UserForm() {
         initComponents();
@@ -361,12 +360,12 @@ public class UserForm extends javax.swing.JPanel {
 
     private void btnActivateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivateStatusActionPerformed
         // TODO add your handling code here:
-//        updateStatus();
-        try{
-            tblUsers.setRowSorter(null);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+        updateStatus();
+//        try{
+//            tblUsers.setRowSorter(null);
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
     }//GEN-LAST:event_btnActivateStatusActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -392,6 +391,8 @@ public class UserForm extends javax.swing.JPanel {
         tblmodel =  (DefaultTableModel) tblUsers.getModel();
         userTbl = new UserTable(tblmodel);
         tblUsers.setRowSorter(new TableRowSorter(tblmodel));
+        while(tblUsers.getRowCount() > 0)
+            tblmodel.removeRow(0);
         userTbl.list();
     }
     
@@ -466,6 +467,12 @@ public class UserForm extends javax.swing.JPanel {
         cbProfile.setSelectedIndex(0);
         txtUsername.setText(null);
         txtName.setText(null);
+        txtAddress.setBorder(noBorder);
+        txtBi.setBorder(noBorder);
+        txtContact.setBorder(noBorder);
+        txtLastName.setBorder(noBorder);
+        txtUsername.setBorder(noBorder);
+        txtName.setBorder(noBorder);
         txtId.setText("");
         txtUsername.setEditable(true);
         btnSave.setText("GRAVAR");
