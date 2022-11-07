@@ -255,6 +255,9 @@ public class LoginForme extends javax.swing.JFrame {
             MainFrame mf = new MainFrame();
             mf.setVisible(true);
         }
+        else{
+            JOptionPane.showMessageDialog(null," Os seus dados nao podem ser carregados, Preencha corretamnente os seus dados de login");
+        }
         
     }
     
