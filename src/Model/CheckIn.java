@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.Date;
+
 public class CheckIn {
     private int id;
     private int prod_id;
@@ -8,10 +10,57 @@ public class CheckIn {
     private String username;
     private String driver_name;
     private double amount;
+    private double available_amount;
     private String prod_name;
+    private double price;
+    private String expire_date;
     private String created_at;
     private String updated_at;
 
+    public CheckIn(int prod_id, int driver_id, double amount,
+            double available_amount, double price, String expire_date) {
+        this.prod_id = prod_id;
+        this.driver_id = driver_id;
+        this.amount = amount;
+        this.available_amount = available_amount;
+        this.price = price;
+        this.expire_date = expire_date;
+    }
+
+    public CheckIn() {
+    }
+
+
+
+    
+    
+    
+    
+    
+    public String getExpire_date() {
+        return expire_date;
+    }
+
+    public void setExpire_date(String expire_date) {
+        this.expire_date = expire_date;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    public double getAvailable_amount() {
+        return available_amount;
+    }
+
+    public void setAvailable_amount(double available_amount) {
+        this.available_amount = available_amount;
+    }
+    
     public int getId() {
         return id;
     }

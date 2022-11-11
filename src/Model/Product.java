@@ -3,6 +3,7 @@ public class Product {
     private int id;
     private String name;
     private double amount;
+    private double available_amount;
     private String unity;
     private double damaged;
     private String category;
@@ -54,7 +55,32 @@ public class Product {
         this.supplier_id = supplier_id;
     }
     
+    public Product(String name, double amount, String unity, String category,
+            int supplier_id, double available_amount) {
+        this.name = name;
+        this.amount = amount;
+        this.unity = unity;
+        this.category = category;
+        this.supplier_id = supplier_id;
+        this.available_amount = available_amount;
+    }
     
+    public Product(int id, String name, double amount, String unity, String category,
+            int supplier_id, double available_amount) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.unity = unity;
+        this.category = category;
+        this.supplier_id = supplier_id;
+        this.available_amount = available_amount;
+    }
+    
+    
+
+    public double getAvailable_amount() {
+        return available_amount;
+    }
 
 //    public Product(String name, double amount, String unity, double damaged) {
 //        this.name = name;
@@ -62,8 +88,9 @@ public class Product {
 //        this.unity = unity;
 //        this.damaged = damaged;
 //    }
-    
-    
+    public void setAvailable_amount(double available_amount) {
+        this.available_amount = available_amount;
+    }
 
     public String getCategory() {
         return category;

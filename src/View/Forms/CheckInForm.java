@@ -1,15 +1,22 @@
 package View.Forms;
 
+import Controller.CheckInController;
 import Controller.DriverController;
 import Controller.ProductController;
+import Model.CheckIn;
 import Model.Driver;
 import Model.Product;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.Date;
 
 public class CheckInForm extends javax.swing.JPanel {
     DriverController driverCtr = new DriverController();
     ProductController prodCtrl = new ProductController();
+    CheckIn checkIn = new CheckIn();
+    CheckInController checkInCtrl = new CheckInController();
     public CheckInForm() {
         initComponents();
         init();
@@ -34,7 +41,7 @@ public class CheckInForm extends javax.swing.JPanel {
         cbDriverId = new javax.swing.JComboBox<>();
         txtDriver = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblSave = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtProdId = new javax.swing.JTextField();
@@ -52,6 +59,9 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txtQtd = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtUnity = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -67,6 +77,7 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel1.setText("IDMorista");
 
         txtCarCod.setEditable(false);
+        txtCarCod.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtCarCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCarCodActionPerformed(evt);
@@ -81,7 +92,7 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Matricula do Carro");
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -89,7 +100,7 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/car.png"))); // NOI18N
         jLabel18.setText("Novo");
 
-        cbDriverId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbDriverId.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cbDriverId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDriverIdActionPerformed(evt);
@@ -97,6 +108,7 @@ public class CheckInForm extends javax.swing.JPanel {
         });
 
         txtDriver.setEditable(false);
+        txtDriver.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDriverActionPerformed(evt);
@@ -121,12 +133,11 @@ public class CheckInForm extends javax.swing.JPanel {
                         .addComponent(txtDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtCarCod, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel18)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCarCod, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(254, 254, 254)
@@ -140,13 +151,16 @@ public class CheckInForm extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(0, 0, 0)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCarCod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbDriverId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,10 +171,15 @@ public class CheckInForm extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(70, 130, 180));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/1_drive_disk_save_icon.png"))); // NOI18N
-        jLabel2.setText("Save");
+        lblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSave.setForeground(new java.awt.Color(255, 255, 255));
+        lblSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/1_drive_disk_save_icon.png"))); // NOI18N
+        lblSave.setText("Save");
+        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSaveMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,6 +191,7 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel8.setText("IdProduto");
 
         txtProdId.setEditable(false);
+        txtProdId.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtProdId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProdIdActionPerformed(evt);
@@ -187,11 +207,18 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel10.setText("IdFornecedor");
 
         txtSupplierId.setEditable(false);
-        txtSupplierId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSupplierId.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("PreçoUnitario");
+
+        txtPrice.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPriceKeyReleased(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -202,8 +229,9 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel14.setText("PreçoTotal");
 
         txtTotal.setEditable(false);
+        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        cbProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbProd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cbProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProdActionPerformed(evt);
@@ -211,8 +239,15 @@ public class CheckInForm extends javax.swing.JPanel {
         });
 
         dcExpireDate.setDateFormatString("yyyy-MM-dd");
+        dcExpireDate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        dcExpireDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dcExpireDateKeyReleased(evt);
+            }
+        });
 
         txtSupplier.setEditable(false);
+        txtSupplier.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSupplierActionPerformed(evt);
@@ -225,22 +260,56 @@ public class CheckInForm extends javax.swing.JPanel {
 
         jTextField13.setEditable(false);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/relatorio.png"))); // NOI18N
         jLabel4.setText("Ver Relatório");
+
+        txtQtd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtQtd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtQtdKeyReleased(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Qt");
+
+        txtUnity.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtUnity.setForeground(new java.awt.Color(255, 255, 255));
+        txtUnity.setText("Qt");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTextField13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(110, 110, 110))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextField13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel4)))
+                .addGap(157, 157, 157))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,71 +317,68 @@ public class CheckInForm extends javax.swing.JPanel {
                         .addGap(80, 80, 80)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(cbProd, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbProd, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUnity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(73, 73, 73)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtProdId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(42, 42, 42))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnity, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel8)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtProdId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(42, 42, 42))
-                    .addComponent(cbProd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal)))
+                        .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -354,8 +420,7 @@ public class CheckInForm extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -365,6 +430,7 @@ public class CheckInForm extends javax.swing.JPanel {
 
     private void cbProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdActionPerformed
         // TODO add your handling code here:
+        setProduct(cbProd.getSelectedItem().toString());
     }//GEN-LAST:event_cbProdActionPerformed
 
     private void txtSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplierActionPerformed
@@ -383,10 +449,60 @@ public class CheckInForm extends javax.swing.JPanel {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_txtDriverActionPerformed
+
+    private void txtPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPriceKeyReleased
+        // TODO add your handling code here:
+        try {
+            double x = Double.parseDouble(txtPrice.getText());
+            setTotal();
+        } catch (NumberFormatException e) {
+            txtPrice.setText("0.00");
+        }
+    }//GEN-LAST:event_txtPriceKeyReleased
+
+    private void txtQtdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdKeyReleased
+        // TODO add your handling code here:
+        try {
+            double x = Double.parseDouble(txtQtd.getText());
+            if(x < 0)
+                txtQtd.setText("1");
+            setTotal();
+        } catch (NumberFormatException e) {
+            txtQtd.setText("1");
+        }
+    }//GEN-LAST:event_txtQtdKeyReleased
+
+    private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
+            // TODO add your handling code here:
+         save();
+    }//GEN-LAST:event_lblSaveMouseClicked
+
+    private void dcExpireDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcExpireDateKeyReleased
+        DateTimeFormatter day = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+        LocalDate date = LocalDate.now().plusDays(7); 
+        Date getDate =  new Date(date.atStartOfDay(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
+        try {
+            Date x = (Date) dcExpireDate.getDate();
+            if(x.before(getDate))
+                setValidate();
+        } catch (NumberFormatException e) {
+            setValidate();
+        }
+    }//GEN-LAST:event_dcExpireDateKeyReleased
     
     private void init(){
         setUpDrivers();
         setUpProducts();
+        txtPrice.setText("0.00");
+        txtQtd.setText("1");
+        setValidate();;
+    }
+    
+    private void setValidate(){
+        DateTimeFormatter day = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+        LocalDate date = LocalDate.now().plusDays(7); 
+        Date getDate =  new Date(date.atStartOfDay(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
+        dcExpireDate.setDate(getDate);
     }
     
     private void setUpDrivers(){
@@ -421,7 +537,6 @@ public class CheckInForm extends javax.swing.JPanel {
 //        cbDriver
         cbProd.removeAllItems();
         ArrayList<Product> prd = getProducts();
-            JOptionPane.showMessageDialog(null, "I arrived: ");
         ArrayList<String> data = new ArrayList<>();
         for(int i = 0; i < prd.size(); i++){
             data.add(String.valueOf(prd.get(i).getName()));
@@ -430,13 +545,19 @@ public class CheckInForm extends javax.swing.JPanel {
         for(int i = 0; i < data.size(); i++)
             cbProd.addItem(data.get(i));
         txtProdId.setText(String.valueOf(prd.get(0).getId()));
+        txtSupplier.setText(prd.get(0).getSupplier());
+        txtSupplierId.setText(String.valueOf(prd.get(0).getSupplier_id()));
+        txtUnity.setText(prd.get(0).getUnity());
     }
     
-    public void setProduct(int data){
+    public void setProduct(String data){
         ArrayList<Product> prod = getProducts();
         for(int i = 0; i < prod.size(); i++)
-            if(prod.get(i).getId() == data){
+            if(prod.get(i).getName().equals(data)){
                 txtProdId.setText(String.valueOf(prod.get(i).getId()));
+                txtSupplier.setText(prod.get(i).getSupplier());
+                txtSupplierId.setText(String.valueOf(prod.get(i).getSupplier_id()));
+                txtUnity.setText(prod.get(i).getUnity());
             }
     }
     
@@ -445,7 +566,20 @@ public class CheckInForm extends javax.swing.JPanel {
         return prodCtrl.getProducts();
     }
     
+    private void setTotal(){
+        txtTotal.setText(String.valueOf(Double.parseDouble(txtPrice.getText()) * Double.parseDouble(txtQtd.getText())));
+    }
     
+    private void save(){
+        String d = dcExpireDate.getDate().toString();
+        checkIn = new CheckIn(Integer.parseInt(txtProdId.getText()), Integer.parseInt(cbDriverId.getSelectedItem().toString()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtPrice.getText()), d);
+        if(checkInCtrl.saveCheckIn(checkIn))
+            clear();
+    }
+    
+    private void clear(){
+        init();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbDriverId;
@@ -457,9 +591,9 @@ public class CheckInForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -471,12 +605,19 @@ public class CheckInForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField13;
+    private javax.swing.JLabel lblSave;
     private javax.swing.JTextField txtCarCod;
     private javax.swing.JTextField txtDriver;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtProdId;
+    private javax.swing.JTextField txtQtd;
     private javax.swing.JTextField txtSupplier;
     private javax.swing.JTextField txtSupplierId;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JLabel txtUnity;
     // End of variables declaration//GEN-END:variables
+
+    private Object SimpleDateFormat(String ddMMyyyy) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -16,7 +16,7 @@ public class ProductController {
          if(db.connect()){
             PreparedStatement stm;
             try {
-                stm = db.conn.prepareStatement("INSERT INTO product(name, amount, unity, supplier_id) VALUES(?, ?, ?, ?)");
+                stm = db.conn.prepareStatement("INSERT INTO product(product_name, amount, unity, supplier_id) VALUES(?, ?, ?, ?)");
                 stm.setString(1, data.getName());
                 stm.setDouble(2, data.getAmount());
                 stm.setString(3, data.getUnity());
@@ -31,19 +31,39 @@ public class ProductController {
         return false;
     }
     
-    
+
+    public boolean increaseProd(int id, double amount){
+        if(db.connect()){
+            PreparedStatement stm;
+            String sql = "UPDATE product SET amount=? WHERE id=?";
+            try {
+                stm = db.conn.prepareStatement(sql);
+                stm.setDouble(1, amount);
+                stm.setInt(2, id);
+                stm.execute();
+                return true;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERRO: "+ex);
+            }finally{
+                db.Disconnect();
+            }
+        }
+
+        return false;
+    }
+
     
     public ArrayList<Product> getProducts(){
         ArrayList<Product> prods = new ArrayList<>();
          if(db.connect()){
-             String sql = "SELECT product.* FROM product INNER JOIN supplier ON product.supplier_id = supplier.id";
+             String sql = "SELECT product.*, supplier.name FROM product INNER JOIN supplier ON product.supplier_id = supplier.id";
                db.runSQL(sql);
             try {
                 while(db.res.next()){
 //                    db.res.first();
-                    prod = new Product(db.res.getInt("id"), db.res.getString("name"), db.res.getDouble("amount"), db.res.getString("unity"), db.res.getString("name"), db.res.getInt("supplier_id"));
+                    prod = new Product(db.res.getInt("id"), db.res.getString("product_name"), db.res.getDouble("amount"), db.res.getString("unity"), db.res.getString("name"), db.res.getInt("supplier_id"));
                     prods.add(prod);
-                    JOptionPane.showMessageDialog(null, db.res.getString("name"));
+//                    JOptionPane.showMessageDialog(null, db.res.getString("email"));
                 } 
                 
                 return prods;
@@ -58,29 +78,6 @@ public class ProductController {
     
     
     
-     
-    public Product updateProduct(Product prod){
-        if(db.connect()){
-            PreparedStatement stm;
-            String sql = "UPDATE dividas SET valorDivida=?, valorAPagar=?, estadoDivida=? WHERE id=?";
-            try {
-                stm = db.conn.prepareStatement(sql);
-//                stm.setFloat(1, valorDivida);
-//                stm.setFloat(2, valorAPagar);
-                stm.setBoolean(3, true);
-//                stm.setInt(4, devedor.getId());
-                stm.execute();
-                JOptionPane.showMessageDialog(null, "Produto Actulizado Com Sucesso!");
-//                return this.clienteLogado(devedor.getId());
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao Ao Actualizar Produto!");
-            }finally{
-                db.Disconnect();
-            }
-            
-        }
-        return null;
-    }
     
     public ArrayList<Product> getProducts(String search){
         ArrayList<Product> prods = new ArrayList<>();
@@ -111,7 +108,7 @@ public class ProductController {
             try {
                 if(db.res.next()){
                     db.res.first();
-//                    prod = new Product(db.res.getString("username"), db.res.getString("password"), db.res.getInt("id"), db.res.getString("name"), db.res.getString("last_name"));
+                    prod = new Product(db.res.getInt("id"), db.res.getString("product_name"), db.res.getDouble("amount"), db.res.getString("unity"), "", db.res.getInt("supplier_id"), db.res.getDouble("amount"));
                     return prod;
                 } 
                 
