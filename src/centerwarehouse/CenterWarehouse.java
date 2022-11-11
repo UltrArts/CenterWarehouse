@@ -17,10 +17,10 @@ public class CenterWarehouse {
               JOptionPane.showMessageDialog(null, "O Sistema precisa efectuar configurações de predefinição! \nPressione Ok para continuar!");
               userCtrl.seed();
           };
-          MainFrame mf = new MainFrame();
-          mf.setVisible(true);
-//          LoginForme lf = new LoginForme();
-//          lf.setVisible(true);
+         // MainFrame mf = new MainFrame();
+         // mf.setVisible(true);
+          LoginForme lf = new LoginForme();
+          lf.setVisible(true);
 //          
     }
 }
