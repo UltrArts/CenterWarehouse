@@ -4,8 +4,12 @@ public class Product {
     private String name;
     private double amount;
     private String unity;
-    private String details;
     private double damaged;
+    private String category;
+    private String supplier;
+    private int supplier_id;
+    private String driver;
+    private int driver_id;
     private String created_at;
     private String updated_at;
     
@@ -14,31 +18,93 @@ public class Product {
         
     }
 
-    public Product(int id, String name, double amount, String unity, String details, double damaged, String created_at, String updated_at) {
+    public Product(int id, String name, double amount, String unity, double damaged, String created_at, String updated_at) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unity = unity;
-        this.details = details;
         this.damaged = damaged;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public Product(String name, double amount, String unity, String details) {
+    public Product(int id, String name, double amount, String unity,
+            String supplier, int supplier_id) {
+        this.id = id;
         this.name = name;
         this.amount = amount;
         this.unity = unity;
-        this.details = details;
+        this.supplier = supplier;
+        this.supplier_id = supplier_id;
     }
 
-    public Product(String name, double amount, String unity, String details, double damaged) {
+    
+    public Product(String name, double amount, String unity) {
         this.name = name;
         this.amount = amount;
         this.unity = unity;
-        this.details = details;
-        this.damaged = damaged;
     }
+
+    public Product(String name, double amount, String unity, String category,
+            int supplier_id) {
+        this.name = name;
+        this.amount = amount;
+        this.unity = unity;
+        this.category = category;
+        this.supplier_id = supplier_id;
+    }
+    
+    
+
+//    public Product(String name, double amount, String unity, double damaged) {
+//        this.name = name;
+//        this.amount = amount;
+//        this.unity = unity;
+//        this.damaged = damaged;
+//    }
+    
+    
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public int getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(int supplier_id) {
+        this.supplier_id = supplier_id;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public int getDriver_id() {
+        return driver_id;
+    }
+
+    public void setDriver_id(int driver_id) {
+        this.driver_id = driver_id;
+    }
+    
     
     
     public int getId() {
@@ -71,14 +137,6 @@ public class Product {
 
     public void setUnity(String unity) {
         this.unity = unity;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
     }
 
     public double getDamaged() {

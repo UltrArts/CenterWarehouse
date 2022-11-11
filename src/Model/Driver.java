@@ -1,14 +1,32 @@
 package Model;
 
 public class Driver extends Person{
-    private String matricula;
+    
+    private String car_cod;
 
-    public String getMatricula() {
-        return matricula;
+    public Driver(String matricula, String name, String lastname) {
+        super(name, lastname);
+        this.car_cod = matricula;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public Driver() {
+    }
+    
+    
+
+    public Driver(String matricula, int id, String name, String lastname) {
+        super(id, name, lastname);
+        this.car_cod = matricula;
+    }
+
+    
+    
+    public String getCar_cod() {
+        return car_cod;
+    }
+
+    public void setCar_cod(String car_cod) {
+        this.car_cod = car_cod;
     }
 
     @Override

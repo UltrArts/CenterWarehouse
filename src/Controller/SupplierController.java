@@ -41,7 +41,7 @@ public class SupplierController {
      public ArrayList<Supplier> getSuppliers(){
         ArrayList<Supplier> data = new ArrayList<>();
          if(db.connect()){
-             String sql = "SELECT * FROM supplier";
+             String sql = "SELECT * FROM supplier ORDER BY name";
             try {
                db.runSQL(sql);
                 while(db.res.next()){

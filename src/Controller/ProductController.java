@@ -2,6 +2,7 @@ package Controller;
 
 import Model.DBConnection;
 import Model.Product;
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,32 +16,34 @@ public class ProductController {
          if(db.connect()){
             PreparedStatement stm;
             try {
-                stm = db.conn.prepareStatement("INSERT INTO user(name, amount, unity, datails) VALUES(?, ?, ?, ?)");
+                stm = db.conn.prepareStatement("INSERT INTO product(name, amount, unity, supplier_id) VALUES(?, ?, ?, ?)");
                 stm.setString(1, data.getName());
                 stm.setDouble(2, data.getAmount());
                 stm.setString(3, data.getUnity());
-                stm.setString(4, data.getDetails());
+                stm.setInt(4, data.getSupplier_id());
                 stm.execute();
                 JOptionPane.showMessageDialog(null, "Produto Gravado Com Sucesso");
                 return true;
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "ERRO: "+ex);
+                JOptionPane.showMessageDialog(null, "ERRO: O Producto Já Existe No Registo!");
             }
         }
         return false;
     }
     
     
+    
     public ArrayList<Product> getProducts(){
         ArrayList<Product> prods = new ArrayList<>();
          if(db.connect()){
-             String sql = "SELECT * FROM product";
+             String sql = "SELECT product.* FROM product INNER JOIN supplier ON product.supplier_id = supplier.id";
                db.runSQL(sql);
             try {
                 while(db.res.next()){
-                    db.res.first();
-//                    prod = new User(db.res.getString("username"), db.res.getString("password"), db.res.getInt("id"), db.res.getString("name"), db.res.getString("last_name"));
-//                    users.add(user);
+//                    db.res.first();
+                    prod = new Product(db.res.getInt("id"), db.res.getString("name"), db.res.getDouble("amount"), db.res.getString("unity"), db.res.getString("name"), db.res.getInt("supplier_id"));
+                    prods.add(prod);
+                    JOptionPane.showMessageDialog(null, db.res.getString("name"));
                 } 
                 
                 return prods;
@@ -80,7 +83,6 @@ public class ProductController {
     }
     
     public ArrayList<Product> getProducts(String search){
-        JOptionPane.showMessageDialog(null, "I'M param");
         ArrayList<Product> prods = new ArrayList<>();
          if(db.connect()){
              String sql = "SELECT * FROM product WHERE id = '"+search+"' OR name LIKE '%"+search+"%' OR supplier_id = '"+search+"'";
@@ -121,5 +123,44 @@ public class ProductController {
         }
         return null;
     }
+     
+     public boolean saveCategory(String text){
+         if(db.connect()){
+            PreparedStatement stm;
+            try {
+                stm = db.conn.prepareStatement("INSERT INTO category(name) VALUES(?)");
+                stm.setString(1, text);
+                stm.execute();
+                JOptionPane.showMessageDialog(null, "Categoria Gravada Com Sucesso");
+                return true;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERRO: "+ex);
+            }
+        }
+        return false;
+     }
+     
+     public ArrayList<String> getCategories(){
+         ArrayList<String> cats = new ArrayList<>();
+          ArrayList<Product> prods = new ArrayList<>();
+         if(db.connect()){
+             String sql = "SELECT * FROM category ORDER BY name";
+               db.runSQL(sql);
+            try {
+                while(db.res.next()){
+//                    db.res.first();
+//                    prod = new User(db.res.getString("username"), db.res.getString("password"), db.res.getInt("id"), db.res.getString("name"), db.res.getString("last_name"));
+//                    prods.add(user);
+                      cats.add(db.res.getString("name"));
+                } 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERRO: a categoria digitada já existe no repositório!");
+            }finally{
+                db.Disconnect();
+            }
+        }
+         
+         return cats;
+     }
     
 }

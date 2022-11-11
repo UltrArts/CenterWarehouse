@@ -21,6 +21,12 @@ public class Person {
         this.lastname = lastname;
     }
     
+
+    public Person(String name, String lastname) {
+        this.name = name;
+        this.lastname = lastname;
+    }
+    
     
 
     public Person(String bi, String name, String lastname, String adress, String contact) {

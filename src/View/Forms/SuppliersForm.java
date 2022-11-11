@@ -17,6 +17,7 @@ public class SuppliersForm extends javax.swing.JPanel {
     SupplierController suppCtrl;
     SupplierTable suppTbl;
     DefaultTableModel tblmodel;
+    ProductForm prodForm = new ProductForm();
     public SuppliersForm() {
         initComponents();
         init();
@@ -535,25 +536,25 @@ public class SuppliersForm extends javax.swing.JPanel {
     
     
     private boolean setUp1(){
-        try{
+//        try{
             supp = new Supplier(txtName.getText(),txtContact.getText(), cbCountry.getSelectedItem().toString(), txtEmail.getText(),
                 Integer.parseInt(txtCountryCod.getText()), Integer.parseInt(txtNuit.getText()),txtCep.getText(), cbproductType.getSelectedItem().toString(), txtAddress.getText() );
             return true;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Atente-se aos compos obrigatórios!");
-        }
-        return false;
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, "Atente-se aos compos obrigatórios!");
+//        }
+//        return false;
     }
     
     private boolean setUp2(){
-        try{
+//        try{
             supp = new Supplier(Integer.parseInt(txtId.getText()), txtName.getText(),txtContact.getText(), cbCountry.getSelectedItem().toString(), txtEmail.getText(),
                 Integer.parseInt(txtCountryCod.getText()), Integer.parseInt(txtNuit.getText()),txtCep.getText(), cbproductType.getSelectedItem().toString(), txtAddress.getText() );
             return true;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Atente-se aos compos obrigatórios!");
-        }
-        return false;
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, "Atente-se aos compos obrigatórios!");
+//        }
+//        return false;
     }
        
     private void populateTable(){
@@ -587,6 +588,7 @@ public class SuppliersForm extends javax.swing.JPanel {
             if(suppCtrl.save(supp)){
                 cleanUp();
                 populateTable();
+                prodForm.setSuppliers();
             }
         }
     }
@@ -597,6 +599,7 @@ public class SuppliersForm extends javax.swing.JPanel {
             if(suppCtrl.update(supp)){
                 cleanUp();
                 populateTable();
+                prodForm.setSuppliers();
             }
         }
     }
