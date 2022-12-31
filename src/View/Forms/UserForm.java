@@ -522,12 +522,12 @@ public class UserForm extends javax.swing.JPanel {
             rs = false;
         }
         
-        if(result[5])
-            txtUsername.setBorder(blueBorder);
-        else{
-            txtUsername.setBorder(orangeBorder);
-            rs = false;
-        }
+//        if(result[5])
+//            txtUsername.setBorder(blueBorder);
+//        else{
+//            txtUsername.setBorder(orangeBorder);
+//            rs = false;
+//        }
         
         return rs;
     }

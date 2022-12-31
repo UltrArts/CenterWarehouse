@@ -15,7 +15,7 @@ public class DriverController {
         if(db.connect()){
             PreparedStatement stm;
             try {
-                stm = db.conn.prepareStatement("INSERT INTO driver(name, last_name, contact, car_cod) VALUES(?, ?, ?, ?)");
+                stm = db.conn.prepareStatement("INSERT INTO driver(driver_name, last_name, contact, car_cod) VALUES(?, ?, ?, ?)");
                 stm.setString(1, data.getName());
                 stm.setString(2, data.getLastname());
                 stm.setString(3, data.getContact());
@@ -41,7 +41,7 @@ public class DriverController {
                db.runSQL(sql);
                 while(db.res.next()){
 //                    db.res.first();
-                   driver = new Driver(db.res.getString("car_cod"), db.res.getInt("id"), db.res.getString("name"), db.res.getString("last_name"));
+                   driver = new Driver(db.res.getString("car_cod"), db.res.getInt("id"), db.res.getString("driver_name"), db.res.getString("last_name"));
                     data.add(driver);
                 } 
                 return data;

@@ -15,7 +15,7 @@ public class SupplierController {
         if(db.connect()){
             PreparedStatement stm;
             try {
-                stm = db.conn.prepareStatement("INSERT INTO supplier(name, country, address, contact, email, country_cod, nuit, cep, product_type) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                stm = db.conn.prepareStatement("INSERT INTO supplier(company, country, address, contact, email, country_cod, nuit, cep, product_type) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 stm.setString(1, data.getName());
                 stm.setString(2, data.getCountry());
                 stm.setString(3, data.getAddress());
@@ -41,12 +41,12 @@ public class SupplierController {
      public ArrayList<Supplier> getSuppliers(){
         ArrayList<Supplier> data = new ArrayList<>();
          if(db.connect()){
-             String sql = "SELECT * FROM supplier ORDER BY name";
+             String sql = "SELECT * FROM supplier ORDER BY company";
             try {
                db.runSQL(sql);
                 while(db.res.next()){
 //                    db.res.first();
-                   supp = new Supplier(db.res.getInt("id"), db.res.getString("name"), db.res.getString("contact"), db.res.getString("country"), db.res.getString("email"), db.res.getInt("country_cod"), db.res.getInt("nuit"), db.res.getString("cep"), db.res.getString("product_type"),
+                   supp = new Supplier(db.res.getInt("id"), db.res.getString("company"), db.res.getString("contact"), db.res.getString("country"), db.res.getString("email"), db.res.getInt("country_cod"), db.res.getInt("nuit"), db.res.getString("cep"), db.res.getString("product_type"),
                            db.res.getString("address"), db.res.getString("updated_at"), db.res.getString("created_at"));
                     data.add(supp);
                 } 
@@ -65,7 +65,7 @@ public class SupplierController {
     public boolean update(Supplier data){
         if(db.connect()){
             PreparedStatement stm;
-            String sql = "UPDATE supplier SET name=?, country=?, address=?, contact=?, email=?, country_cod=?, nuit=?, cep=?, product_type=? WHERE id=?";
+            String sql = "UPDATE supplier SET company=?, country=?, address=?, contact=?, email=?, country_cod=?, nuit=?, cep=?, product_type=? WHERE id=?";
             try {
                 stm = db.conn.prepareStatement(sql);
                 stm.setString(1, data.getName());

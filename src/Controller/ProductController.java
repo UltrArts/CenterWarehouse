@@ -56,12 +56,13 @@ public class ProductController {
     public ArrayList<Product> getProducts(){
         ArrayList<Product> prods = new ArrayList<>();
          if(db.connect()){
-             String sql = "SELECT product.*, supplier.name FROM product INNER JOIN supplier ON product.supplier_id = supplier.id";
+             String sql = "SELECT product.*, supplier.company FROM product INNER JOIN supplier ON product.supplier_id = supplier.id";
                db.runSQL(sql);
             try {
                 while(db.res.next()){
 //                    db.res.first();
-                    prod = new Product(db.res.getInt("id"), db.res.getString("product_name"), db.res.getDouble("amount"), db.res.getString("unity"), db.res.getString("name"), db.res.getInt("supplier_id"));
+                    prod = new Product(db.res.getInt("id"), db.res.getString("product_name"),
+                            db.res.getDouble("amount"), db.res.getString("unity"), db.res.getString("company"), db.res.getInt("supplier_id"));
                     prods.add(prod);
 //                    JOptionPane.showMessageDialog(null, db.res.getString("email"));
                 } 

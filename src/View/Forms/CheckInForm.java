@@ -3,20 +3,31 @@ package View.Forms;
 import Controller.CheckInController;
 import Controller.DriverController;
 import Controller.ProductController;
+import Controller.UserController;
 import Model.CheckIn;
 import Model.Driver;
 import Model.Product;
+import Model.Tables.CheckInTable;
+import Model.Tables.CheckOutTable;
+import Model.Tables.UserTable;
+import java.awt.Color;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class CheckInForm extends javax.swing.JPanel {
     DriverController driverCtr = new DriverController();
     ProductController prodCtrl = new ProductController();
     CheckIn checkIn = new CheckIn();
     CheckInController checkInCtrl = new CheckInController();
+    CheckInTable checkTbl;
+    DefaultTableModel tblmodel;
     public CheckInForm() {
         initComponents();
         init();
@@ -41,8 +52,7 @@ public class CheckInForm extends javax.swing.JPanel {
         cbDriverId = new javax.swing.JComboBox<>();
         txtDriver = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        lblSave = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblAdd = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtProdId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -57,13 +67,12 @@ public class CheckInForm extends javax.swing.JPanel {
         dcExpireDate = new com.toedter.calendar.JDateChooser();
         txtSupplier = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblSave = new javax.swing.JLabel();
         txtQtd = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtUnity = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCheckin = new javax.swing.JTable();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(772, 621));
@@ -135,7 +144,7 @@ public class CheckInForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCarCod, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,20 +180,15 @@ public class CheckInForm extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(70, 130, 180));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        lblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblSave.setForeground(new java.awt.Color(255, 255, 255));
-        lblSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/1_drive_disk_save_icon.png"))); // NOI18N
-        lblSave.setText("Save");
-        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAdd.setForeground(new java.awt.Color(255, 255, 255));
+        lblAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/add1.png"))); // NOI18N
+        lblAdd.setText("Adicionar");
+        lblAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSaveMouseClicked(evt);
+                lblAddMouseClicked(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/1_zoom_icon.png"))); // NOI18N
-        jLabel3.setText("Search");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -258,12 +262,15 @@ public class CheckInForm extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Fornecedor");
 
-        jTextField13.setEditable(false);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/relatorio.png"))); // NOI18N
-        jLabel4.setText("Ver Relatório");
+        lblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSave.setForeground(new java.awt.Color(255, 255, 255));
+        lblSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/relatorio.png"))); // NOI18N
+        lblSave.setText("Concluir");
+        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSaveMouseClicked(evt);
+            }
+        });
 
         txtQtd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtQtd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -287,50 +294,45 @@ public class CheckInForm extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel4)))
-                .addGap(157, 157, 157))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtProdId))
-                        .addGap(80, 80, 80)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cbProd, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtUnity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(dcExpireDate, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(56, 56, 56)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtProdId))
+                                .addGap(80, 80, 80)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(cbProd, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtUnity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(73, 73, 73)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(73, 73, 73)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel14)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel14)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(lblSave)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -376,34 +378,41 @@ public class CheckInForm extends javax.swing.JPanel {
                             .addComponent(jLabel13)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7))
+                    .addComponent(lblAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSave))
+                .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCheckin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IdProduto", "DescriçãoProd", "PreçoUnitário", "Qt.", "Fornecedor", "Validade", "Criado em"
+                "IdProd", "DescriçãoProd", "PreçoUnitário", "Qt.", "Unidade", "Fornecedor", "Validade", "IdMotorista"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, true, false, true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblCheckin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCheckinMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCheckin);
+        if (tblCheckin.getColumnModel().getColumnCount() > 0) {
+            tblCheckin.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblCheckin.getColumnModel().getColumn(3).setPreferredWidth(7);
+            tblCheckin.getColumnModel().getColumn(4).setResizable(false);
+            tblCheckin.getColumnModel().getColumn(7).setPreferredWidth(5);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -420,7 +429,7 @@ public class CheckInForm extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -472,10 +481,11 @@ public class CheckInForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtQtdKeyReleased
 
-    private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
+    private void lblAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddMouseClicked
             // TODO add your handling code here:
-         save();
-    }//GEN-LAST:event_lblSaveMouseClicked
+//         save();
+        addItem();
+    }//GEN-LAST:event_lblAddMouseClicked
 
     private void dcExpireDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcExpireDateKeyReleased
         DateTimeFormatter day = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
@@ -489,14 +499,77 @@ public class CheckInForm extends javax.swing.JPanel {
             setValidate();
         }
     }//GEN-LAST:event_dcExpireDateKeyReleased
+
+    private void tblCheckinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCheckinMouseClicked
+        // TODO add your handling code here:
+        int index = tblCheckin.getSelectedRow();
+        switch(JOptionPane.showConfirmDialog(null, "Pretende remover "+tblCheckin.getValueAt(index, 1)+" da lista")){
+            case JOptionPane.YES_OPTION: removeItem(index);
+        }
+    }//GEN-LAST:event_tblCheckinMouseClicked
+
+    private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
+        save();
+    }//GEN-LAST:event_lblSaveMouseClicked
     
     private void init(){
         setUpDrivers();
         setUpProducts();
         txtPrice.setText("0.00");
         txtQtd.setText("1");
-        setValidate();;
+        setValidate();
+        //Table style
+        tblCheckin.setShowHorizontalLines(true);
+        tblCheckin.setGridColor(new Color(230, 230, 230));
+        tblCheckin.setRowHeight(35);
+        tblCheckin.getTableHeader().setReorderingAllowed(false);
+//        tblCheckin.set
+        tblCheckin.setFont(new Font("times new roman", Font.PLAIN, 18));
+//        txtId.setVisible(false);
+        checkInCtrl = new CheckInController();
+        //Table data
+        populateTable();
     }
+    
+    private void removeItem(int index){
+        tblmodel.removeRow(index);
+    }
+    private void addItem(){
+        String item = cbProd.getSelectedItem().toString();
+        if(findItem(item))
+            JOptionPane.showMessageDialog(null, "Este item já foi adicionado");
+        else{
+            Object[] row = new Object[8];
+            String status;
+            row[0] = txtProdId.getText();
+            row[1] = cbProd.getSelectedItem().toString();
+            row[2] = txtPrice.getText();
+            row[3] = txtQtd.getText();
+            row[4] =  txtUnity.getText();
+            row[5] = txtSupplier.getText();
+            row[6] = dcExpireDate.toString();
+            row[7] = cbDriverId.getSelectedItem().toString();
+
+            tblmodel.addRow(row);
+        }
+    }
+    
+    private boolean findItem(String item){
+        for(int i =0; i < tblCheckin.getRowCount(); i++){
+            if(tblCheckin.getValueAt(i, 1).toString().equals(item))
+                return true;
+        }
+        return false;
+    }
+    private void populateTable(){
+        tblmodel =  (DefaultTableModel) tblCheckin.getModel();
+        checkTbl = new CheckInTable(tblmodel);
+        tblCheckin.setRowSorter(new TableRowSorter(tblmodel));
+        while(tblCheckin.getRowCount() > 0)
+            tblmodel.removeRow(0);
+        checkTbl.list();
+    }
+    
     
     private void setValidate(){
         DateTimeFormatter day = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
@@ -571,10 +644,17 @@ public class CheckInForm extends javax.swing.JPanel {
     }
     
     private void save(){
-        String d = dcExpireDate.getDate().toString();
-        checkIn = new CheckIn(Integer.parseInt(txtProdId.getText()), Integer.parseInt(cbDriverId.getSelectedItem().toString()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtPrice.getText()), d);
-        if(checkInCtrl.saveCheckIn(checkIn))
+        ArrayList<CheckIn> checkInList = new ArrayList<>();
+        for(int i = 0; i < tblCheckin.getRowCount(); i++){
+            String d = dcExpireDate.getDate().toString();
+            checkIn = new CheckIn(Integer.parseInt(txtProdId.getText()), Integer.parseInt(cbDriverId.getSelectedItem().toString()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtQtd.getText()), Double.parseDouble(txtPrice.getText()), d);
+//            if(checkInCtrl.saveCheckIn(checkIn)
+            checkInList.add(checkIn);
+        }
+        if(checkInList.size() > 0){
+            checkInCtrl.saveCheckIn(checkInList);
             clear();
+        }
     }
     
     private void clear(){
@@ -594,8 +674,6 @@ public class CheckInForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -603,9 +681,9 @@ public class CheckInForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField13;
+    private javax.swing.JLabel lblAdd;
     private javax.swing.JLabel lblSave;
+    private javax.swing.JTable tblCheckin;
     private javax.swing.JTextField txtCarCod;
     private javax.swing.JTextField txtDriver;
     private javax.swing.JTextField txtPrice;

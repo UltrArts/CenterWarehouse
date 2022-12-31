@@ -12,6 +12,10 @@ public class CheckIn {
     private double amount;
     private double available_amount;
     private String prod_name;
+    private String supplier;
+    private String unity;
+    private int list_id;
+    private int supplier_id;
     private double price;
     private String expire_date;
     private String created_at;
@@ -26,16 +30,66 @@ public class CheckIn {
         this.price = price;
         this.expire_date = expire_date;
     }
+    
+    
 
     public CheckIn() {
     }
 
+    public CheckIn(int id, int prod_id, int driver_id, int user_id,
+            String username, String driver_name, double amount,
+            double available_amount, String prod_name, String supplier,
+            int supplier_id, double price, String expire_date, String created_at) {
+        this.id = id;
+        this.prod_id = prod_id;
+        this.driver_id = driver_id;
+        this.user_id = user_id;
+        this.username = username;
+        this.driver_name = driver_name;
+        this.amount = amount;
+        this.available_amount = available_amount;
+        this.prod_name = prod_name;
+        this.supplier = supplier;
+        this.supplier_id = supplier_id;
+        this.price = price;
+        this.expire_date = expire_date;
+        this.created_at = created_at;
+    }
+    
+    
+    
 
+    public String getUnity() {
+        return unity;
+    }
 
-    
-    
-    
-    
+    public void setUnity(String unity) {
+        this.unity = unity;
+    }
+
+    public int getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(int list_id) {
+        this.list_id = list_id;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public int getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(int supplier_id) {
+        this.supplier_id = supplier_id;
+    }
     
     public String getExpire_date() {
         return expire_date;
